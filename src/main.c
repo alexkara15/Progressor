@@ -306,7 +306,7 @@ static void handle_time_tick(struct tm* tick_time, TimeUnits units_changed)
 	
 	hourDecimal = ((double)(t->tm_min) / (double)60);
 	dayDecimal = ((double)((t->tm_hour * 60) + t->tm_min) / (double)1440);
-	weekDecimal = ((double)((t->tm_wday * 1440) + (t->tm_hour * 60) + t->tm_min) / (double)10080);
+	weekDecimal = ((double)((((t->tm_wday + 6) % 7) * 1440) + (t->tm_hour * 60) + t->tm_min) / (double)10080);
 	monthDecimal = ((double)(((t->tm_mday - 1) * 1440) + (t->tm_hour * 60) + t->tm_min) / (double)(daysInMonth(t->tm_mon, t->tm_year) * 1440));
 	yearDecimal = ((double)(((t->tm_yday - 1) * 1440) + (t->tm_hour * 60) + t->tm_min) / (double)(isLeapYear(t->tm_year + 1900) ? 366 * 1440: 365 * 1440));
 	
